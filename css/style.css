@@ -1,0 +1,23 @@
+html,
+body {
+	background-image: url('../images/background.jpg');
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  
+}
+.login{
+	background-color: #C7CAC1;
+	 width: 200px;	 
+}
+.sign{
+	background-color: #C7CAC1;
+	 margin-top: 25px;
+	 width: 200px;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/WeddingPlanner" version="1.0.0" viewmodes="maximized">
+	<access origin="*" subdomains="true"></access>
+    <access origin="http://127.0.0.1:4000" subdomains="true"/>
+    <tizen:application id="luBq7vtM6j.WeddingPlanner" package="luBq7vtM6j" required_version="3.0"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>WeddingPlanner</name>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:privilege name="http://tizen.org/privilege/location"/>
+    <tizen:profile name="mobile"/>
+</widget>
