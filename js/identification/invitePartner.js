@@ -100,7 +100,7 @@ window.onload = function() {
     });   
 };
 function SoapCall(firstName,lastName,email,emailPartner,password,place,date){
-	var url  = "http://172.19.6.209:4000/user/addWithWedding";
+	var url  = window.URLSERVER+"/user/addWithWedding";
 	var data = {};
 	data.firstName = firstName;
 	data.lastName  = lastName;
@@ -115,9 +115,10 @@ function SoapCall(firstName,lastName,email,emailPartner,password,place,date){
 	xhr.onreadystatechange  = function () {		
 		 if (xhr.readyState === 4) {  		
 		        if (xhr.status === 200) {  
-		        	 var data = JSON.parse(xhr.responseText);	
-		        	 console.log(data);
-		        	 alert("Welcome");
+		        	 var data = JSON.parse(xhr.responseText);
+                    localStorage.setItem("data", data);
+                    console.log(data);
+                    window.location.href = "../../templates/home.html";
 		        } else {  
 				    alert("user already have a partner");					
 		           console.log("Error", xhr.status);  

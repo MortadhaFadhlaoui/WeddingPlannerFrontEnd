@@ -3,10 +3,8 @@
  */
 window.onload = function() {
     // TODO:: Do your initialization job
-	var email = localStorage.getItem("email");
-	var password = localStorage.getItem("password");
-	console.log(email);
-	console.log(password);
+	var data = JSON.parse(localStorage.getItem('data'));
+    console.log(data);
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if (e.keyName === "back") {

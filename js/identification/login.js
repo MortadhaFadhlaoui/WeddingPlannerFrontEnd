@@ -109,7 +109,8 @@ window.onload = function() {
     });   
 };
 function SoapCall(email,password){
-	var url  = "http://172.19.6.209:4000/user/login";
+	var url  = window.URLSERVER+"/user/login";
+	console.log(url);
 	var data = {};
 	data.email  = email;
 	data.password  = password;
@@ -119,18 +120,18 @@ function SoapCall(email,password){
 	xhr.onreadystatechange  = function () {		
 		 if (xhr.readyState === 4) {  		
 		        if (xhr.status === 200) {  
-		        	 var data = JSON.parse(xhr.responseText);		        	
-		        	 console.log(data)
-		        	 alert("Welcome");
+		        	 var data = JSON.parse(xhr.responseText);
+                    localStorage.setItem("data", JSON.stringify(data));
+		        	 console.log(data);
+		        	window.location.href = "../../templates/home.html";
 		        } else {  
 		        	 var data = JSON.parse(xhr.responseText);		        	
 		        	 console.log(data);
 		        	 console.log(data.message);
 				  alert("somthing wrong");
-		           //console.log("Error", xhr.status);  
-		        	
-		        }  
-		    }  
+		           //console.log("Error", xhr.status);
+		        }
+		    }
 	}
 	xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 	xhr.send(json);

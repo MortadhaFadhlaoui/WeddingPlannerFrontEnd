@@ -119,7 +119,7 @@ window.onload = function() {
     });   
 };
 function SoapCall(email,firstName,lastName,password){
-	var url  = "http://172.19.6.209:4000/user/checkEmail";
+	var url  = window.URLSERVER+"/user/checkEmail";
 	var data = {};
 	data.firstName = firstName;
 	data.lastName  = lastName;
