@@ -2,7 +2,6 @@
 (function ($) {
     "use strict";
 
-
     /*==================================================================
     [ Focus input ]*/
     $('.input100').each(function(){
@@ -35,7 +34,7 @@
   		  	var password = document.getElementById('password').value;
   		 	localStorage.setItem("email", email);
   		 	localStorage.setItem("password", password);
-    		SoapCall(email,password)
+    		SoapCall(email,password);
         	return false;
 		}
 
@@ -98,15 +97,28 @@
 
 window.onload = function() {
     // TODO:: Do your initialization job
-
     // add eventListener for tizenhwkey
+	let email = localStorage.getItem("email");
+	let password = localStorage.getItem("password");
+	console.log(email+password);
+	document.getElementById('email').value = email;
+	document.getElementById('password').value = password;
+    $('.input100').each(function(){
+        if($(this).val().trim() != "") {
+            $(this).addClass('has-val');
+        }
+        else {
+            $(this).removeClass('has-val');
+        }
+    });
     document.addEventListener('tizenhwkey', function(e) {
         if (e.keyName === "back") {
             try {
             	window.location.href = "../index.html";
             } catch (ignore) {}
         }
-    });   
+    });
+   // SoapCall(email,password);
 };
 function SoapCall(email,password){
 	var url  = window.URLSERVER+"/user/login";
@@ -118,21 +130,25 @@ function SoapCall(email,password){
 	var xhr = createXHR();
 	xhr.open("POST", url, true);
 	xhr.onreadystatechange  = function () {		
-		 if (xhr.readyState === 4) {  		
-		        if (xhr.status === 200) {  
-		        	 var data = JSON.parse(xhr.responseText);
+		 if (xhr.readyState === 4) {
+		        if (xhr.status === 200) {
+		        	 let data = JSON.parse(xhr.responseText);
                     localStorage.setItem("data", JSON.stringify(data));
 		        	 console.log(data);
-		        	window.location.href = "../../templates/home.html";
-		        } else {  
-		        	 var data = JSON.parse(xhr.responseText);		        	
-		        	 console.log(data);
-		        	 console.log(data.message);
-				  alert("somthing wrong");
-		           //console.log("Error", xhr.status);
-		        }
+		        	window.location.href = "../templates/home.html";
+		        } else if (xhr.status === 403) {
+		        	 let data = JSON.parse(xhr.responseText);
+		        	 alert(data.message);
+                    let div = document.getElementById('isVerified');
+                         div.innerHTML = "If you didn't receive Verification email";
+                         $("#isVerified").show();
+                         $("#resend").show();
+		        }else {
+                    let data = JSON.parse(xhr.responseText);
+                    alert(data.message);
+                }
 		    }
-	}
+	};
 	xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 	xhr.send(json);
 }
@@ -149,4 +165,30 @@ function createXHR() {
 		throw new Error("Could not create XMLHttpRequest object.");
 	}
 	return xhr;
+}
+function resendMail() {
+    const url  = window.URLSERVER+"/user/resend";
+    let data = {};
+    let email = document.getElementById('email').value;
+    console.log(email);
+    data.email  = email;
+    var json = JSON.stringify(data);
+    var xhr = createXHR();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange  = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let data = JSON.parse(xhr.responseText);
+                let div = document.getElementById('isVerified');
+                div.innerHTML = data.message;
+                $("#isVerified").show();
+                $("#resend").hide();
+            } else {
+                let data = JSON.parse(xhr.responseText);
+                alert(data.message);
+            }
+        }
+    }
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhr.send(json);
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mapUpdate</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+<body>
+<div id="map" height="460px" width="100%"></div>
+<div id="form">
+    <table>
+        <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>
+        <tr><td></td> <td><span style="display: none;color: red" id='errorname'>Please enter name</span> </td> </tr>
+        <tr><td>Address:</td> <td><input type='text' id='address'/> </td> </tr>
+        <tr><td></td> <td><span style="display: none;color: red" id='erroraddress'>Please enter Address</span> </td> </tr>
+        <tr><td>Type:</td> <td><select id='type'> +
+            <option value='House' SELECTED>House</option>
+            <option value='House of Worship'>House of Worship</option>
+            <option value='Hotel'>Hotel</option>
+            <option value='Banquet Hall'>Banquet Hall</option>
+            <option value='Country Club'>Country Club</option>
+            <option value='Farm or Barn'>Farm or Barn</option>
+            <option value='Historic Home'>Historic Home</option>
+            <option value='Museum'>Museum</option>
+            <option value='Theater'>Theater</option>
+            <option value='Restaurant'>Restaurant</option>
+            <option value='Vineyard or Winery'>Vineyard or Winery</option>
+            <option value='Modern Space'>Modern Space</option>
+            <option value='Stadium'>Stadium</option>
+            <option value='Beach'>Beach</option>
+            <option value='Boat'>Boat</option>
+            <option value='Government Building'>Government Building</option>
+            <option value='Garden'>Garden</option>
+        </select> </td></tr>
+        <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
+        <tr><td></td> <td><span style="display: none;color: red" id='errorsaved'>Please save place</span> </td> </tr>
+    </table>
+</div>
+<div id="message">
+    <span>Location saved</span><br>
+    <input type='button' value='Update' onclick='goUpdate()'/><br>
+    <input type='button' value='Done' onclick='goNext()'/>
+</div>
+<script src="../js/mapUpdate.js"></script>
+<script async defer
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB28fWNhrODFDb5ltollc8O9ZpayRfFGfo&libraries=places&callback=initMap"></script>
+</body>
+</html>
+

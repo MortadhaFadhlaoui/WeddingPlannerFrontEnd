@@ -34,7 +34,7 @@
         if (check == true) {
         	var weddingDate = document.getElementById('weddingDate').value;
     	  	localStorage.setItem("weddingDate", weddingDate);
-    		window.location.href = "../templates/weddingPlace.html";
+    		window.location.href = "../templates/mapWeddingPlace.html";
         	return false;
 		}
 
@@ -49,10 +49,9 @@
     });
 
     function validate (input) {
-        var weddingDate = document.getElementById('weddingDate').value;
-        var weddingDateJSforma = new Date($(input).val().trim().replace(/-/g,"/"));
-        var today = new Date();  
-            if($(input).val().trim() == '' || weddingDateJSforma<=today){
+        const weddingDateJSforma = new Date($(input).val().trim().replace(/-/g,"/"));
+        const today = new Date();
+            if($(input).val().trim() === '' || weddingDateJSforma<=today){
                 return false;
             }      
     }
@@ -72,7 +71,14 @@
 })(jQuery);
 window.onload = function() {
     // TODO:: Do your initialization job
-	
+    $('.input100').each(function(){
+        if($(this).val().trim() != "") {
+            $(this).addClass('has-val');
+        }
+        else {
+            $(this).removeClass('has-val');
+        }
+    });
     // add eventListener for tizenhwkey	
     document.addEventListener('tizenhwkey', function(e) {
         if (e.keyName === "back") {

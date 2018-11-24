@@ -3,9 +3,66 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+window.onload = function() {
+    // TODO:: Do your initialization job
+    // add eventListener for tizenhwkey
+    document.addEventListener('tizenhwkey', function(e) {
+        if (e.keyName === "back") {
+            try {
+                window.location.href = "../templates/home.html";
+            } catch (ignore) {}
+        }
+    });
+};
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '582897705463847',
+      xfbml      : true,
+      version    : 'v3.2'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
 
 (function($) {
+    $(document).bind("mobileinit",function(){
+        $.mobile.allowCrossDomainPages(true);
+    });
+    window.URLSERVER = "https://weddingnodeserver.herokuapp.com";
+    let data = JSON.parse(localStorage.getItem('data'));
+    let user = data.user;
 
+    document.getElementById("userName").innerHTML = user.firstName+" "+user.lastName;
+    document.getElementById("email").innerHTML = user.email;
+    
+    //Image Name when clicked
+    var ImageName='';
+    var ImageURL;
+    if (user.image){
+        $("#image").attr("src",window.URLSERVER+"/assets/"+ user.image) ;
+        $("#pic").attr("src",window.URLSERVER+"/assets/"+ user.image) ;
+        $("#pic1").attr("src",window.URLSERVER+"/assets/"+ user.image) ;
+    }
+    let wedding = data.wedding;
+    var items = document.getElementById("items");
+    if (items) {
+    	   if (wedding.album){
+    	        let myHTML = '';
+    	        for (let i = 0; i < wedding.album.length; i++) {
+    	            myHTML += '<article id="article" class="item thumb span-1"><img data-toggle="modal" data-target="#exampleModal" class="deleteId"  src='+window.URLSERVER+"/assets/"+ wedding.album[i]+' alt=""></a></article>';
+    	        }
+    	        items.innerHTML = myHTML    ;
+    	    }	
+	}
     var	$window = $(window),
         $body = $('body'),
         $wrapper = $('#wrapper'),
@@ -130,11 +187,15 @@
     });
 
     breakpoints.on('>small', function() {
-        $main[0]._poptrox.windowMargin = 50;
+        if ($main[0] !=null){
+            $main[0]._poptrox.windowMargin = 50;
+        }
     });
 
     breakpoints.on('<=small', function() {
-        $main[0]._poptrox.windowMargin = 0;
+        if ($main[0] !=null){
+            $main[0]._poptrox.windowMargin = 0;
+        }
     });
 
     // Keyboard shortcuts.
@@ -385,6 +446,245 @@
 
                 });
 
-        })();
-
+        })();   
+   holdPress($(".deleteId"))
 })(jQuery);
+
+
+function SoapCall(images){
+    var data = window.loadData();
+    wedding = data.wedding;
+    const url  = window.URLSERVER+"/user/updateAlbum";
+    var data = {};
+    data.images  = images;
+    data.wedding  = wedding;
+    var json = JSON.stringify(data);
+    var xhr = createXHR();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange  = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var wedding = JSON.parse(xhr.responseText);
+                var data = JSON.parse(localStorage.getItem('data'));
+                console.log(wedding.wedding.album);
+                data.wedding = wedding.wedding;
+                localStorage.setItem("data", JSON.stringify(data));
+                window.location.href = "../templates/gallery.html";
+            } else {
+                var data = JSON.parse(xhr.responseText);
+                console.log(data.message);
+            }
+        }
+    };
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhr.send(json);
+}
+
+function previewFile(){
+            let files    = document.querySelector('input[type=file]').files; //sames as here
+            if (files){
+                for (var i = 0; i < files.length; i++) { //for multiple files
+                    if (CheckFileName(files[i].name)){
+                        if (i===files.length-1){
+                            alert("Image Uploaded !");
+                            UploadImage(files);
+                        }
+                    }else
+                    {
+                        alert("Not a Image File !");
+                        return true;
+                    }
+                }
+            }
+
+}
+function CheckFileName(fileName) {
+
+
+    if (fileName === "")
+    {
+        alert("Browse to upload a Image");
+        return false;
+    }
+    else if (fileName.split(".")[1].toUpperCase() === "PNG" || fileName.split(".")[1].toUpperCase() === "JPG" || fileName.split(".")[1].toUpperCase() === "JPEG")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
+
+}
+
+
+function UploadImage(images){
+    const url  = window.URLSERVER+"/image/uploadMulti";
+    var formData = new FormData();
+
+    for (var i=0; i<images.length;i++){
+        formData.append("file "+i , images[i]);
+    }
+    console.log(url);
+    let xhr = createXHR();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange  = function () {
+        if (xhr.readyState === 4) {
+            var data = JSON.parse(xhr.responseText);
+            if (xhr.status === 200) {
+                console.log(data);
+                SoapCall(data);
+            } else {
+                console.log(data);
+            }
+        }
+    };
+    xhr.send(formData);
+}
+function createXHR() {
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+        console.log("not IE!");
+    }else if (window.ActiveXObject) {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        console.log("it's an IE!");
+    }else
+    {
+        throw new Error("Could not create XMLHttpRequest object.");
+    }
+    return xhr;
+}
+function deleteImage() {
+    if (confirm("This image will be deleted, you are sure!")){
+        deleteImageFromServer(ImageName);
+    }
+}
+function deleteImageFromServer(imageName) {
+    console.log("Hello");
+    var data = window.loadData();
+    wedding = data.wedding;
+    const url  = window.URLSERVER+"/user/deleteImage";
+    var data = {};
+    data.imageName  = imageName;
+    data.wedding  = wedding;
+    var json = JSON.stringify(data);
+    var xhr = createXHR();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange  = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var wedding = JSON.parse(xhr.responseText);
+                var data = JSON.parse(localStorage.getItem('data'));
+                console.log(wedding.wedding.album);
+                data.wedding = wedding.wedding;
+                localStorage.setItem("data", JSON.stringify(data));
+                window.location.href = "../templates/gallery.html";
+            } else {
+                var data = JSON.parse(xhr.responseText);
+                console.log(data.message);
+            }
+        }
+    };
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhr.send(json);
+}
+
+function holdPress(id) {
+    // how many milliseconds is a long press?
+    let longPress = 500;
+    // holds the start time
+    let start;
+
+    id.on( 'mousedown', function( e ) {
+        start = new Date().getTime();
+    } );
+
+    id.on( 'mouseleave', function( e ) {
+        start = 0;
+    } );
+
+    id.on( 'mouseup', function( e ) {
+        if ( new Date().getTime() >= ( start + longPress )  ) {
+            console.log(start);
+        } else {        
+        	let array = this.src.split('/');
+        	ImageName = array[4];
+        	ImageURL = this;
+        }
+    } );
+}
+
+// save image local folder
+function save(){	
+		$('#exampleModal').modal('hide');	
+        data = getBase64Image(ImageURL.src);
+}
+
+// share fcb function
+function goShare() {
+    FB.ui({
+      method: 'share',
+      action_type: 'og.likes',
+      action_properties: JSON.stringify({
+          object: {
+              'og:url': window.URLSERVER,
+              'og:title': "hello there",
+              'og:description': "just have fun",
+              'og:og:image:width': '2560',
+              'og:image:height': '960',
+              'og:image': ImageURL.src
+           }
+      })
+ }, function(response){
+      // Debug response (optional)
+      console.log(response);
+ });
+}
+
+
+// Generate dataURL from src with canvas
+function getBase64Image(url) {
+	 var img = new Image();
+
+	    img.setAttribute('crossOrigin', 'anonymous');
+
+	    img.onload = function () {
+	        var canvas = document.createElement("canvas");
+	        canvas.width =this.width;
+	        canvas.height =this.height;
+
+	        var ctx = canvas.getContext("2d");
+	        ctx.drawImage(this, 0, 0);
+
+	        var dataURL = canvas.toDataURL("image/png");
+
+	        var data = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+	        console.log(data);
+	        var filename = "IMAGE_" + Date.now().toString() + ".png";
+
+            onerror = function(e) {
+                alert("Image not saved");
+                console.log(e.name + " : " + e.message)
+            };
+
+	        onsuccess = function(dir) {
+	              var file = dir.createFile(filename);
+	              file.openStream("w", function (stream) {
+	                  stream.writeBase64(data);
+	                  stream.close();
+	                  tizen.content.scanFile(file.toURI());
+	                  alert("Image saved");
+	              }, onerror, "UTF-8");
+	        },
+
+	    tizen.filesystem.resolve("images", onsuccess, onerror, "rw")
+	    };
+
+	    img.src = url;
+}
+$(document).bind("mobileinit",function(){
+    $.mobile.allowCrossDomainPages(true);
+});

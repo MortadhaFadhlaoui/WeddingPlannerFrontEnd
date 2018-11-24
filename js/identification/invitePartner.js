@@ -38,16 +38,13 @@
     		var firstname = localStorage.getItem("firstname");
     		var lastname = localStorage.getItem("lastname");
     		var weddingDate = localStorage.getItem("weddingDate");
-    		var weddingplace = localStorage.getItem("weddingPlace");
+            let placeName = localStorage.getItem("weddingPlaceName");
+            let placeAddress = localStorage.getItem("weddingPlaceAddress");
+            let placeType = localStorage.getItem("weddingPlaceType");
+            let placeLat = localStorage.getItem("weddingPlaceLat");
+            let placeLng = localStorage.getItem("weddingPlaceLng");
     		var emailPartner = document.getElementById('emailPartner').value;
-    		console.log(email);
-    		console.log(password);
-    		console.log(firstname);
-    		console.log(lastname);
-    		console.log(weddingDate);
-    		console.log(weddingplace);
-    		console.log(emailPartner);
-    		SoapCall(firstname,lastname,email,emailPartner,password,weddingplace,weddingDate);
+    		SoapCall(firstname,lastname,email,emailPartner,password,placeName,placeAddress,placeType,placeLat,placeLng,weddingDate);
         	return false;
 		}
 
@@ -94,12 +91,12 @@ window.onload = function() {
     document.addEventListener('tizenhwkey', function(e) {
         if (e.keyName === "back") {
             try {
-        		window.location.href = "../templates/weddingPlace.html";
+        		window.location.href = "../templates/mapWeddingPlace.html";
             } catch (ignore) {}
         }
     });   
 };
-function SoapCall(firstName,lastName,email,emailPartner,password,place,date){
+function SoapCall(firstName,lastName,email,emailPartner,password,placeName,placeAddress,placeType,placeLat,placeLng,date){
 	var url  = window.URLSERVER+"/user/addWithWedding";
 	var data = {};
 	data.firstName = firstName;
@@ -107,22 +104,29 @@ function SoapCall(firstName,lastName,email,emailPartner,password,place,date){
 	data.email  = email;
 	data.emailPartner  = emailPartner;
 	data.password  = password;
-	data.place  = place;
+	data.placeName  = placeName;
+	data.placeAddress  = placeAddress;
+	data.placeType  = placeType;
+	data.placeLat  = placeLat;
+	data.placeLng  = placeLng;
 	data.date  = date;
+    console.log(data);
 	var json = JSON.stringify(data);
+    console.log(json);
 	var xhr = createXHR();
 	xhr.open("POST", url, true);
 	xhr.onreadystatechange  = function () {		
 		 if (xhr.readyState === 4) {  		
 		        if (xhr.status === 200) {  
 		        	 var data = JSON.parse(xhr.responseText);
-                    localStorage.setItem("data", data);
-                    console.log(data);
-                    window.location.href = "../../templates/home.html";
+                    localStorage.setItem("data", xhr.responseText);
+                    console.log(xhr.responseText);
+                   window.location.href = "../templates/login.html";
 		        } else {  
 				    alert("user already have a partner");					
-		           console.log("Error", xhr.status);  
-		        }  
+		           console.log("Error", xhr.status);
+		           console.log("Error", xhr.responseText);
+		        }
 		    }  
 	}
 	xhr.setRequestHeader('Content-type','application/json; charset=utf-8');

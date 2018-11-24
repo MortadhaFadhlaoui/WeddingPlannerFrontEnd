@@ -94,3 +94,7 @@ window.onload = function() {
         }
     });   
 };
+
+function pickPlace() {
+    window.location.href = "../templates/mapWeddingPlace.html";
+}

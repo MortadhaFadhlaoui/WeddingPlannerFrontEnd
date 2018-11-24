@@ -1,0 +1,192 @@
+
+.u-float-right {
+    float: right;
+}
+
+.u-clearfix:before,
+.u-clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.u-clearfix:after {
+    clear: both;
+}
+
+.u-clearfix {
+    *zoom: 1;
+}
+
+.u-flex-center {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.card {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    box-shadow: 10 2px 3px rgba(0, 0, 0, .1);
+    margin-bottom: 25px;
+    width: 100%;
+
+}
+
+.card-media {
+    float: left;
+    padding: 0 0 25px 25px;
+    position: relative;
+    width: 145px;
+}
+
+.card-media-img {
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+    float: left;
+    position: relative;
+    height: 90px;
+}
+
+
+.card-media-tag {
+    border-radius: 12px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .22);
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: .4px;
+    padding: 5px 8px;
+    position: absolute;
+    left: 20px;
+    text-transform: uppercase;
+}
+
+.card-media-tag-orange {
+    background-color: #57ff22;
+    color: #ffffff;
+}
+
+.card-media-tag-brown {
+    background-color: #1b8582;
+    color: #ffffff;
+}
+.card-media-tag-red {
+    background-color: #851c12;
+    color: #ffffff;
+}
+
+.card-body {
+    float: left;
+    padding: 25px 25px 25px 20px;
+    width: 415px;
+}
+
+.card-body-heading {
+    float: left;
+    color: #6f6f6f;
+    display: inline-block;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-left: 20px;
+    word-break: normal;
+    padding-right: 50px;
+}
+
+.card-body-options {
+    float: right;
+}
+
+.card-body-option {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    margin-left: 5px;
+}
+
+.card-body-star {
+    float: right;
+    list-style-type: none;
+    margin: 12px 0;
+    padding: 0;
+}
+
+.card-body-stars {
+    float: right;
+    list-style-type: none;
+    margin: 12px 0;
+    padding: 0;
+}
+
+.card-body-stars > li {
+    float: right;
+    cursor: pointer;
+    display: inline-block;
+
+}
+
+.card-button {
+    float: left;
+    color: #9C948A;
+    display: inline-block;
+    font-weight: 500;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 200ms ease-out;
+}
+
+.card-button svg {
+    fill: #9C948A;
+    transition: all 200ms ease-out;
+}
+
+.card-button-cta {
+    background-color: #9C948A;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+    color: #fff;
+}
+
+.card-button-cta:hover {
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, .18);
+    background-color: #F44336;
+}
+
+.card-button-link:hover {
+    color: #444;
+}
+
+.card-button-link {
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.card-button-link:hover svg {
+    fill: #444;
+}
+
+.card-button-icon {
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.floating-action-button {
+    background-color: #FF4133;
+    border-radius: 50%;
+    bottom: 25px;
+    box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+    cursor: pointer;
+    height: 56px;
+    position: absolute;
+    right: 25px;
+    transition: all 200ms ease-out;
+    width: 56px;
+}
+
+.floating-action-button:hover {
+    background-color: #ff2111;
+    box-shadow: 0 0 6px rgba(0,0,0,.16), 0 6px 12px rgba(0,0,0,.32);
+}
+

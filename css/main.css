@@ -148,12 +148,8 @@ mark {
 	color: inherit;
 }
 
-input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
 
-input,
+ 
 select,
 textarea {
 	-moz-appearance: none;
@@ -395,7 +391,7 @@ body.is-preload #bg {
 /* Type */
 
 body,
-input,
+ 
 select,
 textarea {
 	color: rgba(255, 255, 255, 0.75);
@@ -408,7 +404,7 @@ textarea {
 
 @media screen and (max-width: 1680px) {
 	body,
-	input,
+	 
 	select,
 	textarea {
 		font-size: 12pt;
@@ -417,7 +413,7 @@ textarea {
 
 @media screen and (max-width: 1280px) {
 	body,
-	input,
+	 
 	select,
 	textarea {
 		font-size: 11pt;
@@ -426,7 +422,7 @@ textarea {
 
 @media screen and (max-width: 980px) {
 	body,
-	input,
+	 
 	select,
 	textarea {
 		font-size: 12pt;
@@ -435,7 +431,7 @@ textarea {
 
 @media screen and (max-width: 736px) {
 	body,
-	input,
+	 
 	select,
 	textarea {
 		font-size: 12pt;
@@ -444,7 +440,7 @@ textarea {
 
 @media screen and (max-width: 480px) {
 	body,
-	input,
+	 
 	select,
 	textarea {
 		font-size: 12pt;
@@ -2344,9 +2340,6 @@ ul.icons li a {
 		margin-bottom: 0.5em;
 	}
 
-	form input[type="text"],
-	form input[type="email"],
-	form input[type="password"],
 	form select,
 	form textarea {
 		position: relative;
@@ -2367,18 +2360,12 @@ ul.icons li a {
 		transition: all 0.35s ease-in-out;
 	}
 
-		form input[type="text"]:focus,
-		form input[type="email"]:focus,
-		form input[type="password"]:focus,
 		form select:focus,
 		form textarea:focus {
 			box-shadow: 0 0 2px 1px #8ebebc;
 			background: #fff;
 		}
 
-	form input[type="text"],
-	form input[type="email"],
-	form input[type="password"],
 	form select {
 		line-height: 1.25em;
 	}
@@ -2387,9 +2374,6 @@ ul.icons li a {
 		min-height: 14em;
 	}
 
-	form ::-webkit-input-placeholder {
-		color: #555 !important;
-	}
 
 	form :-moz-placeholder {
 		color: #555 !important;
@@ -2399,9 +2383,6 @@ ul.icons li a {
 		color: #555 !important;
 	}
 
-	form :-ms-input-placeholder {
-		color: #555 !important;
-	}
 
 	form ::-moz-focus-inner {
 		border: 0;
@@ -2440,9 +2421,7 @@ ul.icons li a {
 
 /* Button */
 
-	input[type="button"],
-	input[type="submit"],
-	input[type="reset"],
+
 	button,
 	.button {
 		position: relative;
@@ -2464,17 +2443,13 @@ ul.icons li a {
 		transition: background-color 0.35s ease-in-out;
 	}
 
-		input[type="button"]:hover,
-		input[type="submit"]:hover,
-		input[type="reset"]:hover,
+
 		button:hover,
 		.button:hover {
 			background-color: #9ececc;
 		}
 
-		input[type="button"]:active,
-		input[type="submit"]:active,
-		input[type="reset"]:active,
+
 		button:active,
 		.button:active {
 			background-color: #7eaeac;
@@ -2758,7 +2733,7 @@ ul.icons li a {
 
 		/* Basic */
 
-			body, input, textarea, select {
+			body, textarea, select {
 				font-size: 17pt;
 			}
 
@@ -2804,7 +2779,7 @@ ul.icons li a {
 
 		/* Basic */
 
-			body, input, textarea, select {
+			body,   textarea, select {
 				font-size: 16pt;
 			}
 
@@ -2879,7 +2854,7 @@ ul.icons li a {
 				overflow-x: hidden;
 			}
 
-			body, input, textarea, select {
+			body,   textarea, select {
 				font-size: 16pt;
 			}
 
@@ -3061,7 +3036,7 @@ ul.icons li a {
 
 		/* Basic */
 
-			body, input, textarea, select {
+			body,   textarea, select {
 				font-size: 14pt;
 			}
 
@@ -3610,6 +3585,4 @@ ul.icons li a {
 	text-align: center;
 	width: 100%;
 }
-
-
 

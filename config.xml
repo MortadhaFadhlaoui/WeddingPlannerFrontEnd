@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/WeddingPlanner" version="1.0.0" viewmodes="maximized">
-	<access origin="*" subdomains="true"></access>
-    <access origin="http://192.168.1.5:4000" subdomains="true"/>
-    <tizen:application id="luBq7vtM6j.WeddingPlanner" package="luBq7vtM6j" required_version="3.0"/>
+    <access origin="*" subdomains="true"/>
+    <access origin="https://weddingnodeserver.herokuapp.com" subdomains="true"/>
+    <access origin="http://googleapis.com" subdomains="true"/>
+    <access origin="http://gstatic.com" subdomains="true"/>
+    <tizen:application id="luBq7vtM6j.WeddingPlanner" package="luBq7vtM6j" required_version="4.0"/>
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
-    <icon src="icon.png"/>
+    <icon src="com.wepala.weddingplan.jpg"/>
     <name>WeddingPlanner</name>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
+    <tizen:privilege name="http://tizen.org/privilege/content.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/content.write"/>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:privilege name="http://tizen.org/privilege/location"/>
     <tizen:profile name="mobile"/>
+    <tizen:setting screen-orientation="portrait" context-menu="enable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
 </widget>

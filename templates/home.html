@@ -6,11 +6,13 @@
 -->
 <html>
 	<head>
-		<title>Prologue by HTML5 UP</title>
+		<title>Home</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../css/main.css" />
 		<link rel="stylesheet" href="../css/noscript1.css" />
+		<link rel="stylesheet" href="../css/home.css" />
+		<link rel="stylesheet" href="../css/index.css" />
 	</head>
 	<body class="is-preload">
 
@@ -18,21 +20,21 @@
 			<div id="headera">
 
 				<div class="top">
-
 					<!-- Logo -->
 						<div id="logo">
-							<span class="image avatar48"><img src="../assets/images/avatar.jpg" alt="" /></span>
-							<h1 id="title">Jane Doe</h1>
-							<p>Hyperspace Engineer</p>
+							<span><img id="pic1" class="avatar" src="../assets/images/placeholder.png" alt="" /></span>
+							<h1 id="userName"></h1>
+							<p id="email"></p>
 						</div>
 
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
 								<li><a href="home.html" id="top-link"><span class="icon fa-home">Home</span></a></li>
-								<li><a href="guests.html" id="portfolio-link"><span class="icon fa-tasks">Tasks</span></a></li>
-								<li><a href="tasks.html" id="about-link"><span class="icon fa-users">Guests</span></a></li>
+								<li><a href="tasks.html" id="portfolio-link"><span class="icon fa-tasks">Tasks</span></a></li>
+								<li><a href="guests.html" id="about-link"><span class="icon fa-users">Guests</span></a></li>
 								<li><a href="gallery.html" id="contact-link"><span class="icon fa-camera-retro">Gallery</span></a></li>
+								<li><a href="account.html" id="account"><span class="icon fa-user">My Account</span></a></li>
 								<li><a href="login.html" id="sign-out"><span class="icon fa-sign-out">Signout</span></a></li>
 							</ul>
 						</nav>
@@ -49,16 +51,10 @@
 			<div id="main1">
 				<!-- Header -->
 				<header id="header">
-					<a href="#" class="icon fa-heart"><h3>Mortadha & Mortadha</h3></a>
-					<a href="#" class="icon fa-map-marker"><p>Ariana</p></a>
+					<a href="#" class="icon fa-heart"><h3 id="firstNamePartners"></h3></a>
+					<a href="#" class="icon fa-map-marker"><p id="weddingPlace" ></p></a>
 					<a href="#" class="icon fa-calendar"></a>
-					<nav>
-						<ul>
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						</ul>
-					</nav>
+					<p id="demo"></p>
 				</header>
 
 
@@ -75,7 +71,10 @@
 			<script src="../js/app/util.js"></script>
 			<script src="../js/app/main.js"></script>
 			<script src="../js/app/main1.js"></script>
+			<script src="../js/index.js"></script>
+			<script src="../js/config/config.js"></script>
 			<script src="../js/home.js"></script>
 
 	</body>
+	<div class="se-pre-con"></div>
 </html>
